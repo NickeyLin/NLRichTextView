@@ -14,9 +14,8 @@
 		014083011A1304C900784765 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 014083001A1304C900784765 /* Images.xcassets */; };
 		014083041A1304C900784765 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 014083021A1304C900784765 /* LaunchScreen.xib */; };
 		014083101A1304C900784765 /* NLRichTextViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0140830F1A1304C900784765 /* NLRichTextViewTests.m */; };
-		0140831E1A13086800784765 /* NLRichTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0140831D1A13086800784765 /* NLRichTextView.m */; };
 		014083221A1308FF00784765 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0140831F1A1308CF00784765 /* CoreText.framework */; };
-		014083251A13094D00784765 /* MarkupParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 014083241A13094D00784765 /* MarkupParser.m */; };
+		01F44FDC1A133CE900F042A9 /* NLRichTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F44FDB1A133CE900F042A9 /* NLRichTextView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,11 +42,9 @@
 		014083091A1304C900784765 /* NLRichTextViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NLRichTextViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0140830E1A1304C900784765 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0140830F1A1304C900784765 /* NLRichTextViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NLRichTextViewTests.m; sourceTree = "<group>"; };
-		0140831C1A13086800784765 /* NLRichTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLRichTextView.h; sourceTree = "<group>"; };
-		0140831D1A13086800784765 /* NLRichTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLRichTextView.m; sourceTree = "<group>"; };
 		0140831F1A1308CF00784765 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
-		014083231A13094D00784765 /* MarkupParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarkupParser.h; sourceTree = "<group>"; };
-		014083241A13094D00784765 /* MarkupParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarkupParser.m; sourceTree = "<group>"; };
+		01F44FDA1A133CE900F042A9 /* NLRichTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLRichTextView.h; sourceTree = "<group>"; };
+		01F44FDB1A133CE900F042A9 /* NLRichTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLRichTextView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +87,7 @@
 		014082F21A1304C900784765 /* NLRichTextView */ = {
 			isa = PBXGroup;
 			children = (
+				01F44FD91A133CE900F042A9 /* Classes */,
 				014082F71A1304C900784765 /* AppDelegate.h */,
 				014082F81A1304C900784765 /* AppDelegate.m */,
 				014082FA1A1304C900784765 /* ViewController.h */,
@@ -97,10 +95,6 @@
 				014082FD1A1304C900784765 /* Main.storyboard */,
 				014083001A1304C900784765 /* Images.xcassets */,
 				014083021A1304C900784765 /* LaunchScreen.xib */,
-				014083231A13094D00784765 /* MarkupParser.h */,
-				014083241A13094D00784765 /* MarkupParser.m */,
-				0140831C1A13086800784765 /* NLRichTextView.h */,
-				0140831D1A13086800784765 /* NLRichTextView.m */,
 				014082F31A1304C900784765 /* Supporting Files */,
 				014083211A1308DE00784765 /* Framework */,
 			);
@@ -139,6 +133,15 @@
 				0140831F1A1308CF00784765 /* CoreText.framework */,
 			);
 			name = Framework;
+			sourceTree = "<group>";
+		};
+		01F44FD91A133CE900F042A9 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				01F44FDA1A133CE900F042A9 /* NLRichTextView.h */,
+				01F44FDB1A133CE900F042A9 /* NLRichTextView.m */,
+			);
+			path = Classes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -241,11 +244,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				014083251A13094D00784765 /* MarkupParser.m in Sources */,
 				014082FC1A1304C900784765 /* ViewController.m in Sources */,
 				014082F91A1304C900784765 /* AppDelegate.m in Sources */,
 				014082F61A1304C900784765 /* main.m in Sources */,
-				0140831E1A13086800784765 /* NLRichTextView.m in Sources */,
+				01F44FDC1A133CE900F042A9 /* NLRichTextView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

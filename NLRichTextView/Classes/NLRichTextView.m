@@ -1,34 +1,19 @@
 //
-//  MarkupParser.m
+//  NLRichTextView.m
 //  NLRichTextView
 //
 //  Created by Nick.Lin on 14/11/12.
 //  Copyright (c) 2014年 changhong. All rights reserved.
 //
 
-#import "MarkupParser.h"
+#import "NLRichTextView.h"
 #import <CoreText/CoreText.h>
-static void deallockCallback(void * ref){
-    ref = nil;
-}
 
-static CGFloat widthCallback(void *ref){
-    return [((NSString *)[(__bridge NSDictionary *)ref objectForKey:@"width"]) floatValue];
-}
-
-static CGFloat ascentCallback(void *ref){
-    return [((NSString *)[(__bridge NSDictionary *)ref objectForKey:@"height"]) floatValue];
-}
-
-static CGFloat descentCallback(void *ref){
-    return [((NSString *)[(__bridge NSDictionary *)ref objectForKey:@"descent"]) floatValue];
-}
 static inline BOOL validateTag(NSString *tag){
     return [tag isEqualToString:@"b"] || [tag isEqualToString:@"i"] || [tag isEqualToString:@"text"] || [tag isEqualToString:@"img"] || [tag isEqualToString:@"font"];
 }
 
 static UIColor *colorFromHex(long hex){
-    
     int32_t r = (int32_t)((hex & 0xff0000) >> 16);
     int32_t g = (int32_t)((hex & 0x00ff00) >> 8);
     int32_t b = (int32_t)(hex & 0x0000ff);
@@ -47,20 +32,13 @@ static UIColor *colorFromHex(long hex){
     self = [super init];
     if (self) {
         _font = @"Optima";
-        _color = [UIColor blackColor];
-        _strokeColor = [UIColor whiteColor];
-        _strokeWidth = 0.0;
-        _fontSize = 16;
         _images = [NSMutableArray array];
-        _fontType = Regular;
     }
     return self;
 }
 
 - (void)dealloc{
     _font = nil;
-    _color = nil;
-    _strokeColor = nil;
     _images = nil;
 }
 
@@ -91,7 +69,7 @@ static UIColor *colorFromHex(long hex){
         currentFont = _font;
     }
     if (currentFontSize <= 5) {
-        currentFontSize = _fontSize;
+        currentFontSize = 16;
     }
     CTFontRef fontRef;
     UIColor *color = nil;
@@ -111,7 +89,7 @@ static UIColor *colorFromHex(long hex){
         [scanner scanHexLongLong:&result];
         color = colorFromHex(result);
     }else{
-        color = _color;
+        color = [UIColor blackColor];
     }
     
     FontStyle fontStyle = FontStyleRegular;
@@ -121,12 +99,12 @@ static UIColor *colorFromHex(long hex){
             fontStyle |= FontStyleUnderline;
         }
     }
-
+    
     NSDictionary *dic = [[NSDictionary alloc]initWithObjectsAndKeys:
-           (id)color.CGColor, kCTForegroundColorAttributeName,
-           (__bridge id)fontRef, kCTFontAttributeName,
-           @(fontStyle & FontStyleUnderline), kCTUnderlineStyleAttributeName,
-           nil];
+                         (id)color.CGColor, kCTForegroundColorAttributeName,
+                         (__bridge id)fontRef, kCTFontAttributeName,
+                         @(fontStyle & FontStyleUnderline), kCTUnderlineStyleAttributeName,
+                         nil];
     return dic;
 }
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string{
@@ -146,5 +124,99 @@ static UIColor *colorFromHex(long hex){
     if (_parserComplete) {
         _parserComplete(attrstring);
     }
+}
+@end
+
+@implementation NLRichTextView
+- (id)initWithFrame:(CGRect)frame{
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.backgroundColor = [UIColor whiteColor];
+    }
+    return self;
+}
+
+- (void)refresh{
+    if (_attString) {
+        [self setRichText:_text];
+        [self setNeedsDisplay];
+    }
+}
+
+- (void)setRichText:(NSString *)richText{
+    _text = richText;
+    MarkupParser *p = [[MarkupParser alloc]init];
+    [p markupXMLString:richText complete:^(NSAttributedString *attrString) {
+        _attString = attrString;
+        int height = [self getAttributedStringHeightWithString:attrString WidthValue:self.bounds.size.width];
+        height += 20;
+        if (height >= self.frame.size.height) {
+            height = self.frame.size.height;
+        }
+        
+        CGRect textFrame;
+        if (_alignment & NLTextAlignmentCenter) {
+            textFrame = CGRectMake(0, (self.frame.size.height - height) / 2, self.frame.size.width, height);
+        }else{
+            textFrame = self.bounds;
+        }
+        CGMutablePathRef path = CGPathCreateMutable();
+        textFrame = CGRectInset(textFrame, 10, 10);
+        CGPathAddRect(path, NULL, textFrame );
+        
+        CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((__bridge CFAttributedStringRef)_attString);
+        
+        //use the column path
+        CTFrameRef frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, [_attString length]), path, NULL);
+        _ctFrame = (__bridge id)(frame);
+        CFRelease(framesetter);
+        CFRelease(path);
+    }];
+}
+- (int)getAttributedStringHeightWithString:(NSAttributedString *)string  WidthValue:(int) width
+{
+    int total_height = 0;
+    
+    CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)string);    //string 为要<strong>计算</strong><strong>高度</strong>的NSAttributedString
+    CGRect drawingRect = CGRectMake(0, 0, width, 1000);  //这里的高要设置足够大
+    CGMutablePathRef path = CGPathCreateMutable();
+    CGPathAddRect(path, NULL, drawingRect);
+    CTFrameRef textFrame = CTFramesetterCreateFrame(framesetter,CFRangeMake(0,0), path, NULL);
+    CGPathRelease(path);
+    CFRelease(framesetter);
+    
+    NSArray *linesArray = (NSArray *) CTFrameGetLines(textFrame);
+    
+    CGPoint origins[[linesArray count]];
+    CTFrameGetLineOrigins(textFrame, CFRangeMake(0, 0), origins);
+    
+    int line_y = (int) origins[[linesArray count] -1].y;  //最后一行line的原点y坐标
+    
+    CGFloat ascent;
+    CGFloat descent;
+    CGFloat leading;
+    
+    CTLineRef line = (__bridge CTLineRef) [linesArray objectAtIndex:[linesArray count]-1];
+    CTLineGetTypographicBounds(line, &ascent, &descent, &leading);
+    
+    total_height = 1000 - line_y + (int) descent +1;    //+1为了纠正descent转换成int小数点后舍去的值
+    
+    CFRelease(textFrame);
+    
+    return total_height;
+    
+}
+- (void)drawRect:(CGRect)rect{
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetTextMatrix(context, CGAffineTransformIdentity);
+    CGContextTranslateCTM(context, 0, self.bounds.size.height);
+    CGContextScaleCTM(context, 1.0, -1.0);
+    
+    CTFrameDraw((__bridge CTFrameRef)(_ctFrame), context);
+    CFRelease((__bridge CFTypeRef)(_ctFrame));
+}
+
+- (void)dealloc{
+    
 }
 @end
