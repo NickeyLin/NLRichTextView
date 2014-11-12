@@ -53,7 +53,7 @@ typedef enum {
 
 /**
  *  must start with '<text>' and end with '</text>'
- *  <text><b color='0x000000' size='12' font-name='Optim' font-style='underline/strike' background-color='0x000000'></b><i></i><img></img></text>
+ *  <text><b color='0x000000' size='12' font-name='Optim' font-style='underline/strike' background-color='0x000000'></b><i></i><img></img></text>暂不支持嵌套
  */
 @property (strong, nonatomic) NSString              *richText;
 @property (strong, readonly, nonatomic) NSString    *realText;

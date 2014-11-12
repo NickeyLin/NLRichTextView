@@ -23,7 +23,7 @@
     _rtView.layer.borderColor = [UIColor lightGrayColor].CGColor;
     _rtView.layer.borderWidth = 1;
     _rtView.alignment = NLTextAlignmentCenter;
-    [_rtView setRichText:@"<text><b color='0xaa1245' size='12' font-name='Optim' font-style='underline' background-color='0x000000'>烹饪123456</b><i>aaa</i> </text>"];
+    [_rtView setRichText:@"<text><b color='0xaa1245' size='18' font-name='Optim' font-style='underline' background-color='0x000000'>烹饪123456</b><i>aaa</i></text>"];
     [self.view addSubview:_rtView];
 }
 

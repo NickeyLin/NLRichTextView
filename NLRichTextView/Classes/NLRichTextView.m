@@ -13,14 +13,40 @@ static inline BOOL validateTag(NSString *tag){
     return [tag isEqualToString:@"b"] || [tag isEqualToString:@"i"] || [tag isEqualToString:@"text"] || [tag isEqualToString:@"img"] || [tag isEqualToString:@"font"];
 }
 
-static UIColor *colorFromHex(long hex){
+
+@interface UIColor (ColorFromHex)
++ (UIColor *)colorFromHex:(unsigned long)hex;
++ (UIColor *)colorFromHexString:(NSString *)hexString;
+@end
+@implementation UIColor (ColorFromHex)
++ (UIColor *)colorFromHex:(unsigned long)hex{
     int32_t r = (int32_t)((hex & 0xff0000) >> 16);
     int32_t g = (int32_t)((hex & 0x00ff00) >> 8);
     int32_t b = (int32_t)(hex & 0x0000ff);
     return [UIColor colorWithRed:(r/255.0) green:(g/255.0) blue:(b/255.0) alpha:1];
 }
 
++ (UIColor *)colorFromHexString:(NSString *)hexString{
+    if (!hexString || (![hexString hasPrefix:@"0x"] && ![hexString hasPrefix:@"#"])) {
+        return nil;
+    }
+    UIColor *color = nil;
+    unsigned long long result;
+    NSScanner *scanner = [NSScanner scannerWithString:hexString];
+    if ([hexString hasPrefix:@"0x"]) {
+        [scanner scanHexLongLong:&result];
+        color = [self colorFromHex:result];
+    }else if ([hexString hasPrefix:@"#"]){
+        [scanner setScanLocation:1];
+        [scanner scanHexLongLong:&result];
+        color = [self colorFromHex:result];
+    }
+    return color;
+}
+
+@end
 @interface MarkupParser ()<NSXMLParserDelegate>
+@property (strong, nonatomic) NSMutableArray    *arrayTagsTree;
 @property (strong, nonatomic) NSMutableArray    *arrayAttributeString;
 @property (strong, nonatomic) NSString          *currentTag;
 @property (strong, nonatomic) NSDictionary      *currentAttribute;
@@ -52,16 +78,6 @@ static UIColor *colorFromHex(long hex){
     }
 }
 
-- (void)parserDidStartDocument:(NSXMLParser *)parser{
-    _arrayAttributeString = [NSMutableArray array];
-}
-
-- (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict{
-    _currentTag = elementName;
-    _currentAttribute = attributeDict;
-    NSLog(@"\nelementName:%@\nnamespace:%@\nqualifiedName:%@\nattributes:%@", elementName, namespaceURI, qName, attributeDict);
-}
-
 - (NSDictionary *)attributesWithTag:(NSString *)tag attrDict:(NSDictionary *)attrDict{
     NSString *currentFont = [attrDict objectForKey:@"font"];
     CGFloat currentFontSize = [[attrDict objectForKey:@"size"] floatValue];
@@ -71,24 +87,18 @@ static UIColor *colorFromHex(long hex){
     if (currentFontSize <= 5) {
         currentFontSize = 16;
     }
-    CTFontRef fontRef;
     UIColor *color = nil;
-    
+    UIFont *font;
     if (validateTag(tag) && [tag.lowercaseString isEqualToString:@"b"]) {
-        fontRef = CTFontCreateWithName((__bridge CFStringRef)[currentFont stringByAppendingString:@"-Bold"], currentFontSize, NULL);
+        font = [UIFont fontWithName:[currentFont stringByAppendingString:@"-Bold"] size:currentFontSize];
     }else if (validateTag(tag) && [tag.lowercaseString isEqualToString:@"i"]) {
-        fontRef = CTFontCreateWithName((__bridge CFStringRef)[currentFont stringByAppendingString:@"-Italic"], currentFontSize, NULL);
+        font = [UIFont fontWithName:[currentFont stringByAppendingString:@"-Bold"] size:currentFontSize];
     }else{
-        fontRef = CTFontCreateWithName((__bridge CFStringRef)[currentFont stringByAppendingString:@"-Regular"], currentFontSize, NULL);
+        font = [UIFont fontWithName:[currentFont stringByAppendingString:@"-Bold"] size:currentFontSize];
     }
-    NSString *colorHex = [attrDict objectForKey:@"color"];
-    if (colorHex && colorHex.length > 0) {
-        unsigned long long result;
-        NSScanner *scanner = [NSScanner scannerWithString:colorHex];
-        [scanner setScanLocation:2]; // bypass '0x' character
-        [scanner scanHexLongLong:&result];
-        color = colorFromHex(result);
-    }else{
+    
+    color = [UIColor colorFromHexString:[attrDict objectForKey:@"color"]];
+    if (color == nil) {
         color = [UIColor blackColor];
     }
     
@@ -100,15 +110,40 @@ static UIColor *colorFromHex(long hex){
         }
     }
     
-    NSDictionary *dic = [[NSDictionary alloc]initWithObjectsAndKeys:
-                         (id)color.CGColor, kCTForegroundColorAttributeName,
-                         (__bridge id)fontRef, kCTFontAttributeName,
-                         @(fontStyle & FontStyleUnderline), kCTUnderlineStyleAttributeName,
-                         nil];
+    UIColor *backgroundColor = [UIColor colorFromHexString:[attrDict objectForKey:@"background-color"]];
+    if (backgroundColor == nil) {
+        backgroundColor = [UIColor clearColor];
+    }
+    
+    NSDictionary *dic = @{NSBackgroundColorAttributeName : [UIColor yellowColor],
+                          NSUnderlineStyleAttributeName : @(fontStyle & FontStyleUnderline),
+                          NSForegroundColorAttributeName : color,
+                          NSFontAttributeName : font};
+    
     return dic;
+}
+
+#pragma mark - NSXMLParser Delegate
+- (void)parserDidStartDocument:(NSXMLParser *)parser{
+    _arrayAttributeString = [NSMutableArray array];
+    _arrayTagsTree = [NSMutableArray array];
+}
+
+- (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict{
+    [_arrayTagsTree addObject:elementName];
+    _currentTag = elementName;
+    _currentAttribute = attributeDict;
+    NSLog(@"\nelementName:%@\nattributes:%@", _arrayTagsTree, attributeDict);
+}
+
+- (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName{
+    [_arrayTagsTree removeLastObject];
+    NSLog(@"\nelementName:%@", _arrayTagsTree);
+
 }
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string{
     NSAttributedString *attrString = [[NSAttributedString alloc]initWithString:string attributes:[self attributesWithTag:_currentTag attrDict:_currentAttribute]];
+    
     [_arrayAttributeString addObject:attrString];
     NSLog(@"foundCharacters:%@", string);
 }
@@ -148,14 +183,13 @@ static UIColor *colorFromHex(long hex){
     MarkupParser *p = [[MarkupParser alloc]init];
     [p markupXMLString:richText complete:^(NSAttributedString *attrString) {
         _attString = attrString;
-        int height = [self getAttributedStringHeightWithString:attrString WidthValue:self.bounds.size.width];
-        height += 20;
-        if (height >= self.frame.size.height) {
-            height = self.frame.size.height;
-        }
         
         CGRect textFrame;
         if (_alignment & NLTextAlignmentCenter) {
+            int height = [self getAttributedStringHeightWithString:attrString WidthValue:self.bounds.size.width] + 20;
+            if (height >= self.frame.size.height) {
+                height = self.frame.size.height;
+            }
             textFrame = CGRectMake(0, (self.frame.size.height - height) / 2, self.frame.size.width, height);
         }else{
             textFrame = self.bounds;
@@ -211,7 +245,7 @@ static UIColor *colorFromHex(long hex){
     CGContextSetTextMatrix(context, CGAffineTransformIdentity);
     CGContextTranslateCTM(context, 0, self.bounds.size.height);
     CGContextScaleCTM(context, 1.0, -1.0);
-    
+
     CTFrameDraw((__bridge CTFrameRef)(_ctFrame), context);
     CFRelease((__bridge CFTypeRef)(_ctFrame));
 }
