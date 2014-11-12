@@ -31,7 +31,6 @@ typedef enum {
 }FontStyle;
 
 @interface MarkupParser : NSObject
-@property (strong, nonatomic) NSString  *font;
 @property (strong, nonatomic) NSMutableArray    *images;
 /**
  *  解析xml字符串

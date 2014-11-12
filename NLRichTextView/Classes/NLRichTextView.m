@@ -9,6 +9,8 @@
 #import "NLRichTextView.h"
 #import <CoreText/CoreText.h>
 
+#define VALID_STR(s) (s || s.length > 0)
+
 static inline BOOL validateTag(NSString *tag){
     return [tag isEqualToString:@"b"] || [tag isEqualToString:@"i"] || [tag isEqualToString:@"text"] || [tag isEqualToString:@"img"] || [tag isEqualToString:@"font"];
 }
@@ -45,11 +47,18 @@ static inline BOOL validateTag(NSString *tag){
 }
 
 @end
+
+#define DefaultFontName @"Optima"
+#define DefaultFontSize 14
+#define DefaultColor    [UIColor blackColor]
+
 @interface MarkupParser ()<NSXMLParserDelegate>
+@property (strong, nonatomic) NSString          *font;
+@property (assign, nonatomic) CGFloat           fontSize;
+@property (strong, nonatomic) UIColor           *fontColor;
+@property (assign, nonatomic) FontStyle         fontStyle;
 @property (strong, nonatomic) NSMutableArray    *arrayTagsTree;
 @property (strong, nonatomic) NSMutableArray    *arrayAttributeString;
-@property (strong, nonatomic) NSString          *currentTag;
-@property (strong, nonatomic) NSDictionary      *currentAttribute;
 @property (strong, nonatomic) void              (^parserComplete)(NSAttributedString *attrString);
 @end
 @implementation MarkupParser
@@ -79,48 +88,112 @@ static inline BOOL validateTag(NSString *tag){
 }
 
 - (NSDictionary *)attributesWithTag:(NSString *)tag attrDict:(NSDictionary *)attrDict{
+    BOOL isRootTag = [tag isEqualToString:@"text"];
+    NSMutableDictionary *dicTemp = [NSMutableDictionary dictionary];
+    
     NSString *currentFont = [attrDict objectForKey:@"font"];
     CGFloat currentFontSize = [[attrDict objectForKey:@"size"] floatValue];
-    if (!currentFont || currentFont.length <= 0) {
-        currentFont = _font;
-    }
-    if (currentFontSize <= 5) {
-        currentFontSize = 16;
-    }
-    UIColor *color = nil;
-    UIFont *font;
-    if (validateTag(tag) && [tag.lowercaseString isEqualToString:@"b"]) {
-        font = [UIFont fontWithName:[currentFont stringByAppendingString:@"-Bold"] size:currentFontSize];
-    }else if (validateTag(tag) && [tag.lowercaseString isEqualToString:@"i"]) {
-        font = [UIFont fontWithName:[currentFont stringByAppendingString:@"-Bold"] size:currentFontSize];
-    }else{
-        font = [UIFont fontWithName:[currentFont stringByAppendingString:@"-Bold"] size:currentFontSize];
-    }
-    
-    color = [UIColor colorFromHexString:[attrDict objectForKey:@"color"]];
-    if (color == nil) {
-        color = [UIColor blackColor];
-    }
-    
-    FontStyle fontStyle = FontStyleRegular;
+    NSString *colorAttribute = [attrDict objectForKey:@"color"];
     NSString *fontStyleString = [attrDict objectForKey:@"font-style"];
-    if (fontStyleString && fontStyleString.length > 0) {
-        if ([fontStyleString rangeOfString:@"underline"].location != NSNotFound) {
-            fontStyle |= FontStyleUnderline;
+
+    if (isRootTag) {
+        //FONT
+        if (currentFont && currentFont.length > 0) {
+            _font = currentFont;
+        }else{
+            currentFont = _font;
         }
+        if (currentFontSize > 5) {
+            _fontSize = currentFontSize;
+        }else{
+            currentFontSize = _fontSize;
+        }
+        UIFont *font = [UIFont fontWithName:currentFont size:currentFontSize];
+        if (!font) {
+            _font = DefaultFontName;
+            _fontSize = DefaultFontSize;
+            font = [UIFont fontWithName:_font size:_fontSize];
+        }
+        [dicTemp setObject:font forKey:NSFontAttributeName];
+        
+        //font color
+        UIColor *color = [UIColor colorFromHexString:colorAttribute];
+        if (color) {
+            _fontColor = color;
+        }else{
+            _fontColor = DefaultColor;
+            color = _fontColor;
+        }
+        [dicTemp setObject:color forKey:NSForegroundColorAttributeName];
+        
+        //font style
+        if (VALID_STR(fontStyleString)) {
+            if ([fontStyleString rangeOfString:@"underline"].location != NSNotFound) {
+                _fontStyle |= FontStyleUnderline;
+            }
+        }
+        [dicTemp setObject:@(_fontStyle & FontStyleUnderline) forKey:NSUnderlineStyleAttributeName];
+        
+    }else{
+        //FONT
+        UIFont *parentFont = ((UIFont *)[[[[_arrayTagsTree lastObject] allObjects]lastObject]objectForKey:NSFontAttributeName]);
+
+        if (!currentFont || currentFont.length <= 0) {
+            if (parentFont && [parentFont respondsToSelector:@selector(fontName)]) {
+                currentFont = [parentFont familyName];
+            }else{
+                currentFont = _font;
+            }
+        }
+        if (currentFontSize < 5 ) {
+            if (parentFont && [parentFont respondsToSelector:@selector(fontName)]) {
+                currentFontSize = [parentFont pointSize];
+            }else{
+                currentFontSize = _fontSize;
+            }
+        }
+        UIFont *font ;
+        if (validateTag(tag) && [tag.lowercaseString isEqualToString:@"b"]) {
+            font = [UIFont fontWithName:[currentFont stringByAppendingString:@"-Bold"] size:currentFontSize];
+        }else if (validateTag(tag) && [tag.lowercaseString isEqualToString:@"i"]) {
+            font = [UIFont fontWithName:[currentFont stringByAppendingString:@"-Italic"] size:currentFontSize];
+        }else{
+            font = [UIFont fontWithName:currentFont size:currentFontSize];
+        }
+        if (!font) {
+            font = [[[[_arrayTagsTree lastObject] allObjects]lastObject]objectForKey:NSFontAttributeName];
+            if (!font) {
+                font = [UIFont fontWithName:_font size:_fontSize];
+            }
+        }
+        [dicTemp setObject:font forKey:NSFontAttributeName];
+        
+        //color
+        UIColor *color = [UIColor colorFromHexString:colorAttribute];
+        if (!color) {
+            UIColor *parentColor = [[[[_arrayTagsTree lastObject] allObjects]lastObject]objectForKey:NSForegroundColorAttributeName];
+            if (parentColor) {
+                color = parentColor;
+            }else{
+                color = _fontColor;
+            }
+        }
+        [dicTemp setObject:color forKey:NSForegroundColorAttributeName];
+        
+        //font style
+        FontStyle fontStyle;
+        if (VALID_STR(fontStyleString)) {
+            if ([fontStyleString rangeOfString:@"underline"].location != NSNotFound) {
+                fontStyle |= FontStyleUnderline;
+            }
+        }else{
+            FontStyle parentFontStyle = [[[[[_arrayTagsTree lastObject] allObjects]lastObject]objectForKey:NSUnderlineStyleAttributeName] intValue];
+            fontStyle = parentFontStyle;
+        }
+        [dicTemp setObject:@(fontStyle & FontStyleUnderline) forKey:NSUnderlineStyleAttributeName];
     }
     
-    UIColor *backgroundColor = [UIColor colorFromHexString:[attrDict objectForKey:@"background-color"]];
-    if (backgroundColor == nil) {
-        backgroundColor = [UIColor clearColor];
-    }
-    
-    NSDictionary *dic = @{NSBackgroundColorAttributeName : [UIColor yellowColor],
-                          NSUnderlineStyleAttributeName : @(fontStyle & FontStyleUnderline),
-                          NSForegroundColorAttributeName : color,
-                          NSFontAttributeName : font};
-    
-    return dic;
+    return [NSDictionary dictionaryWithDictionary:dicTemp];
 }
 
 #pragma mark - NSXMLParser Delegate
@@ -130,9 +203,8 @@ static inline BOOL validateTag(NSString *tag){
 }
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict{
-    [_arrayTagsTree addObject:elementName];
-    _currentTag = elementName;
-    _currentAttribute = attributeDict;
+    [_arrayTagsTree addObject:@{elementName : [self attributesWithTag:elementName attrDict:attributeDict]}];
+
     NSLog(@"\nelementName:%@\nattributes:%@", _arrayTagsTree, attributeDict);
 }
 
@@ -142,7 +214,7 @@ static inline BOOL validateTag(NSString *tag){
 
 }
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string{
-    NSAttributedString *attrString = [[NSAttributedString alloc]initWithString:string attributes:[self attributesWithTag:_currentTag attrDict:_currentAttribute]];
+    NSAttributedString *attrString = [[NSAttributedString alloc]initWithString:string attributes:[[[_arrayTagsTree lastObject] allObjects]lastObject]];
     
     [_arrayAttributeString addObject:attrString];
     NSLog(@"foundCharacters:%@", string);
