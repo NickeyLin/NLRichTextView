@@ -23,6 +23,9 @@
     _rtView.layer.borderColor = [UIColor lightGrayColor].CGColor;
     _rtView.layer.borderWidth = 1;
     _rtView.alignment = NLTextAlignmentCenter;
+
+    [_rtView setRichText:@"<text size='14'>ss级please<i>ll</i>ssd<a color='0xff0000'> %sd级火力 </a><b color='0x000000'>烹饪</b><b color='0xff0000'> %d分钟 </b></text>"];
+
     [self.view addSubview:_rtView];
 }
 

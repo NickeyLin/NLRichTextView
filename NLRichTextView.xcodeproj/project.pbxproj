@@ -10,12 +10,32 @@
 		0139AF701A15E01A004E8E81 /* libDurexKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0139AF6C1A15DE69004E8E81 /* libDurexKit.a */; };
 		014082F61A1304C900784765 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 014082F51A1304C900784765 /* main.m */; };
 		014082F91A1304C900784765 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 014082F81A1304C900784765 /* AppDelegate.m */; };
-		014082FC1A1304C900784765 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 014082FB1A1304C900784765 /* ViewController.m */; };
 		014082FF1A1304C900784765 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 014082FD1A1304C900784765 /* Main.storyboard */; };
 		014083011A1304C900784765 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 014083001A1304C900784765 /* Images.xcassets */; };
 		014083041A1304C900784765 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 014083021A1304C900784765 /* LaunchScreen.xib */; };
 		014083101A1304C900784765 /* NLRichTextViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0140830F1A1304C900784765 /* NLRichTextViewTests.m */; };
 		014083221A1308FF00784765 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0140831F1A1308CF00784765 /* CoreText.framework */; };
+		0148425E1A1700710067503C /* NLSqlite.m in Sources */ = {isa = PBXBuildFile; fileRef = 0148425D1A1700710067503C /* NLSqlite.m */; };
+		0148426C1A17024F0067503C /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0148426B1A17024F0067503C /* RootViewController.m */; };
+		0148426E1A1703260067503C /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0148426D1A1703260067503C /* libsqlite3.dylib */; };
+		014842711A1704CF0067503C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 014842701A1704CF0067503C /* ViewController.m */; };
+		014842941A1705DC0067503C /* RABatchChanges.m in Sources */ = {isa = PBXBuildFile; fileRef = 014842781A1705DC0067503C /* RABatchChanges.m */; };
+		014842951A1705DC0067503C /* RATreeNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 0148427A1A1705DC0067503C /* RATreeNode.m */; };
+		014842961A1705DC0067503C /* RATreeNodeCollectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0148427D1A1705DC0067503C /* RATreeNodeCollectionController.m */; };
+		014842971A1705DC0067503C /* RATreeNodeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0148427F1A1705DC0067503C /* RATreeNodeController.m */; };
+		014842981A1705DC0067503C /* RATreeNodeItem+Private.m in Sources */ = {isa = PBXBuildFile; fileRef = 014842821A1705DC0067503C /* RATreeNodeItem+Private.m */; };
+		014842991A1705DC0067503C /* RATreeNodeItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 014842841A1705DC0067503C /* RATreeNodeItem.m */; };
+		0148429A1A1705DC0067503C /* RATreeView+Enums.m in Sources */ = {isa = PBXBuildFile; fileRef = 014842861A1705DC0067503C /* RATreeView+Enums.m */; };
+		0148429B1A1705DC0067503C /* RATreeView+Private.m in Sources */ = {isa = PBXBuildFile; fileRef = 014842881A1705DC0067503C /* RATreeView+Private.m */; };
+		0148429C1A1705DC0067503C /* RATreeView+RATreeNodeCollectionControllerDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0148428A1A1705DC0067503C /* RATreeView+RATreeNodeCollectionControllerDataSource.m */; };
+		0148429D1A1705DC0067503C /* RATreeView+TableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0148428C1A1705DC0067503C /* RATreeView+TableViewDataSource.m */; };
+		0148429E1A1705DC0067503C /* RATreeView+TableViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0148428E1A1705DC0067503C /* RATreeView+TableViewDelegate.m */; };
+		0148429F1A1705DC0067503C /* RATreeView+UIScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 014842901A1705DC0067503C /* RATreeView+UIScrollView.m */; };
+		014842A01A1705DC0067503C /* RATreeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 014842931A1705DC0067503C /* RATreeView.m */; };
+		014842A31A1706E40067503C /* SqliteViewCotroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 014842A21A1706E40067503C /* SqliteViewCotroller.m */; };
+		014842A81A17306F0067503C /* ContactInfoData.m in Sources */ = {isa = PBXBuildFile; fileRef = 014842A71A17306F0067503C /* ContactInfoData.m */; };
+		014842AB1A17309B0067503C /* Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 014842AA1A17309B0067503C /* Model.m */; };
+		014842AE1A1736A20067503C /* contact.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 014842AD1A1736A20067503C /* contact.sqlite */; };
 		01F44FDC1A133CE900F042A9 /* NLRichTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F44FDB1A133CE900F042A9 /* NLRichTextView.m */; };
 /* End PBXBuildFile section */
 
@@ -58,8 +78,6 @@
 		014082F51A1304C900784765 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		014082F71A1304C900784765 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		014082F81A1304C900784765 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		014082FA1A1304C900784765 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		014082FB1A1304C900784765 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		014082FE1A1304C900784765 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		014083001A1304C900784765 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		014083031A1304C900784765 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -67,6 +85,49 @@
 		0140830E1A1304C900784765 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0140830F1A1304C900784765 /* NLRichTextViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NLRichTextViewTests.m; sourceTree = "<group>"; };
 		0140831F1A1308CF00784765 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		0148425C1A1700710067503C /* NLSqlite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLSqlite.h; sourceTree = "<group>"; };
+		0148425D1A1700710067503C /* NLSqlite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLSqlite.m; sourceTree = "<group>"; };
+		0148426A1A17024F0067503C /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		0148426B1A17024F0067503C /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		0148426D1A1703260067503C /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		0148426F1A1704CF0067503C /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		014842701A1704CF0067503C /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		014842771A1705DC0067503C /* RABatchChanges.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RABatchChanges.h; sourceTree = "<group>"; };
+		014842781A1705DC0067503C /* RABatchChanges.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RABatchChanges.m; sourceTree = "<group>"; };
+		014842791A1705DC0067503C /* RATreeNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RATreeNode.h; sourceTree = "<group>"; };
+		0148427A1A1705DC0067503C /* RATreeNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RATreeNode.m; sourceTree = "<group>"; };
+		0148427B1A1705DC0067503C /* RATreeNode_ClassExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RATreeNode_ClassExtension.h; sourceTree = "<group>"; };
+		0148427C1A1705DC0067503C /* RATreeNodeCollectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RATreeNodeCollectionController.h; sourceTree = "<group>"; };
+		0148427D1A1705DC0067503C /* RATreeNodeCollectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RATreeNodeCollectionController.m; sourceTree = "<group>"; };
+		0148427E1A1705DC0067503C /* RATreeNodeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RATreeNodeController.h; sourceTree = "<group>"; };
+		0148427F1A1705DC0067503C /* RATreeNodeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RATreeNodeController.m; sourceTree = "<group>"; };
+		014842801A1705DC0067503C /* RATreeNodeItem+ClassExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RATreeNodeItem+ClassExtension.h"; sourceTree = "<group>"; };
+		014842811A1705DC0067503C /* RATreeNodeItem+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RATreeNodeItem+Private.h"; sourceTree = "<group>"; };
+		014842821A1705DC0067503C /* RATreeNodeItem+Private.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RATreeNodeItem+Private.m"; sourceTree = "<group>"; };
+		014842831A1705DC0067503C /* RATreeNodeItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RATreeNodeItem.h; sourceTree = "<group>"; };
+		014842841A1705DC0067503C /* RATreeNodeItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RATreeNodeItem.m; sourceTree = "<group>"; };
+		014842851A1705DC0067503C /* RATreeView+Enums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RATreeView+Enums.h"; sourceTree = "<group>"; };
+		014842861A1705DC0067503C /* RATreeView+Enums.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RATreeView+Enums.m"; sourceTree = "<group>"; };
+		014842871A1705DC0067503C /* RATreeView+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RATreeView+Private.h"; sourceTree = "<group>"; };
+		014842881A1705DC0067503C /* RATreeView+Private.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RATreeView+Private.m"; sourceTree = "<group>"; };
+		014842891A1705DC0067503C /* RATreeView+RATreeNodeCollectionControllerDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RATreeView+RATreeNodeCollectionControllerDataSource.h"; sourceTree = "<group>"; };
+		0148428A1A1705DC0067503C /* RATreeView+RATreeNodeCollectionControllerDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RATreeView+RATreeNodeCollectionControllerDataSource.m"; sourceTree = "<group>"; };
+		0148428B1A1705DC0067503C /* RATreeView+TableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RATreeView+TableViewDataSource.h"; sourceTree = "<group>"; };
+		0148428C1A1705DC0067503C /* RATreeView+TableViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RATreeView+TableViewDataSource.m"; sourceTree = "<group>"; };
+		0148428D1A1705DC0067503C /* RATreeView+TableViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RATreeView+TableViewDelegate.h"; sourceTree = "<group>"; };
+		0148428E1A1705DC0067503C /* RATreeView+TableViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RATreeView+TableViewDelegate.m"; sourceTree = "<group>"; };
+		0148428F1A1705DC0067503C /* RATreeView+UIScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RATreeView+UIScrollView.h"; sourceTree = "<group>"; };
+		014842901A1705DC0067503C /* RATreeView+UIScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RATreeView+UIScrollView.m"; sourceTree = "<group>"; };
+		014842911A1705DC0067503C /* RATreeView_ClassExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RATreeView_ClassExtension.h; sourceTree = "<group>"; };
+		014842921A1705DC0067503C /* RATreeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RATreeView.h; sourceTree = "<group>"; };
+		014842931A1705DC0067503C /* RATreeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RATreeView.m; sourceTree = "<group>"; };
+		014842A11A1706E40067503C /* SqliteViewCotroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SqliteViewCotroller.h; sourceTree = "<group>"; };
+		014842A21A1706E40067503C /* SqliteViewCotroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SqliteViewCotroller.m; sourceTree = "<group>"; };
+		014842A61A17306F0067503C /* ContactInfoData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactInfoData.h; sourceTree = "<group>"; };
+		014842A71A17306F0067503C /* ContactInfoData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactInfoData.m; sourceTree = "<group>"; };
+		014842A91A17309B0067503C /* Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
+		014842AA1A17309B0067503C /* Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Model.m; sourceTree = "<group>"; };
+		014842AD1A1736A20067503C /* contact.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = contact.sqlite; sourceTree = "<group>"; };
 		01F44FDA1A133CE900F042A9 /* NLRichTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLRichTextView.h; sourceTree = "<group>"; };
 		01F44FDB1A133CE900F042A9 /* NLRichTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLRichTextView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -76,6 +137,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0148426E1A1703260067503C /* libsqlite3.dylib in Frameworks */,
 				0139AF701A15E01A004E8E81 /* libDurexKit.a in Frameworks */,
 				014083221A1308FF00784765 /* CoreText.framework in Frameworks */,
 			);
@@ -103,6 +165,7 @@
 		014082E71A1304C900784765 = {
 			isa = PBXGroup;
 			children = (
+				0148426D1A1703260067503C /* libsqlite3.dylib */,
 				0139AF641A15DE69004E8E81 /* DurexKitExample.xcodeproj */,
 				014082F21A1304C900784765 /* NLRichTextView */,
 				0140830C1A1304C900784765 /* NLRichTextViewTests */,
@@ -122,12 +185,13 @@
 		014082F21A1304C900784765 /* NLRichTextView */ = {
 			isa = PBXGroup;
 			children = (
+				014842AC1A1736A20067503C /* Resource */,
 				0139AF581A15D4F8004E8E81 /* NLCommon.h */,
+				014842A41A1707030067503C /* Model */,
+				014842631A17012B0067503C /* TestUI */,
 				01F44FD91A133CE900F042A9 /* Classes */,
 				014082F71A1304C900784765 /* AppDelegate.h */,
 				014082F81A1304C900784765 /* AppDelegate.m */,
-				014082FA1A1304C900784765 /* ViewController.h */,
-				014082FB1A1304C900784765 /* ViewController.m */,
 				014082FD1A1304C900784765 /* Main.storyboard */,
 				014083001A1304C900784765 /* Images.xcassets */,
 				014083021A1304C900784765 /* LaunchScreen.xib */,
@@ -171,9 +235,112 @@
 			name = Framework;
 			sourceTree = "<group>";
 		};
+		014842631A17012B0067503C /* TestUI */ = {
+			isa = PBXGroup;
+			children = (
+				014842741A1705DC0067503C /* SqliteDemo */,
+				014842721A1704DD0067503C /* RichTextDemo */,
+				0148426A1A17024F0067503C /* RootViewController.h */,
+				0148426B1A17024F0067503C /* RootViewController.m */,
+			);
+			path = TestUI;
+			sourceTree = "<group>";
+		};
+		014842721A1704DD0067503C /* RichTextDemo */ = {
+			isa = PBXGroup;
+			children = (
+				0148426F1A1704CF0067503C /* ViewController.h */,
+				014842701A1704CF0067503C /* ViewController.m */,
+			);
+			name = RichTextDemo;
+			sourceTree = "<group>";
+		};
+		014842741A1705DC0067503C /* SqliteDemo */ = {
+			isa = PBXGroup;
+			children = (
+				014842751A1705DC0067503C /* RATreeView */,
+				014842A11A1706E40067503C /* SqliteViewCotroller.h */,
+				014842A21A1706E40067503C /* SqliteViewCotroller.m */,
+			);
+			path = SqliteDemo;
+			sourceTree = "<group>";
+		};
+		014842751A1705DC0067503C /* RATreeView */ = {
+			isa = PBXGroup;
+			children = (
+				014842761A1705DC0067503C /* Private Files */,
+				014842921A1705DC0067503C /* RATreeView.h */,
+				014842931A1705DC0067503C /* RATreeView.m */,
+			);
+			path = RATreeView;
+			sourceTree = "<group>";
+		};
+		014842761A1705DC0067503C /* Private Files */ = {
+			isa = PBXGroup;
+			children = (
+				014842771A1705DC0067503C /* RABatchChanges.h */,
+				014842781A1705DC0067503C /* RABatchChanges.m */,
+				014842791A1705DC0067503C /* RATreeNode.h */,
+				0148427A1A1705DC0067503C /* RATreeNode.m */,
+				0148427B1A1705DC0067503C /* RATreeNode_ClassExtension.h */,
+				0148427C1A1705DC0067503C /* RATreeNodeCollectionController.h */,
+				0148427D1A1705DC0067503C /* RATreeNodeCollectionController.m */,
+				0148427E1A1705DC0067503C /* RATreeNodeController.h */,
+				0148427F1A1705DC0067503C /* RATreeNodeController.m */,
+				014842801A1705DC0067503C /* RATreeNodeItem+ClassExtension.h */,
+				014842811A1705DC0067503C /* RATreeNodeItem+Private.h */,
+				014842821A1705DC0067503C /* RATreeNodeItem+Private.m */,
+				014842831A1705DC0067503C /* RATreeNodeItem.h */,
+				014842841A1705DC0067503C /* RATreeNodeItem.m */,
+				014842851A1705DC0067503C /* RATreeView+Enums.h */,
+				014842861A1705DC0067503C /* RATreeView+Enums.m */,
+				014842871A1705DC0067503C /* RATreeView+Private.h */,
+				014842881A1705DC0067503C /* RATreeView+Private.m */,
+				014842891A1705DC0067503C /* RATreeView+RATreeNodeCollectionControllerDataSource.h */,
+				0148428A1A1705DC0067503C /* RATreeView+RATreeNodeCollectionControllerDataSource.m */,
+				0148428B1A1705DC0067503C /* RATreeView+TableViewDataSource.h */,
+				0148428C1A1705DC0067503C /* RATreeView+TableViewDataSource.m */,
+				0148428D1A1705DC0067503C /* RATreeView+TableViewDelegate.h */,
+				0148428E1A1705DC0067503C /* RATreeView+TableViewDelegate.m */,
+				0148428F1A1705DC0067503C /* RATreeView+UIScrollView.h */,
+				014842901A1705DC0067503C /* RATreeView+UIScrollView.m */,
+				014842911A1705DC0067503C /* RATreeView_ClassExtension.h */,
+			);
+			path = "Private Files";
+			sourceTree = "<group>";
+		};
+		014842A41A1707030067503C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				014842A91A17309B0067503C /* Model.h */,
+				014842AA1A17309B0067503C /* Model.m */,
+				014842A51A1730400067503C /* SpliteModel */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		014842A51A1730400067503C /* SpliteModel */ = {
+			isa = PBXGroup;
+			children = (
+				014842A61A17306F0067503C /* ContactInfoData.h */,
+				014842A71A17306F0067503C /* ContactInfoData.m */,
+			);
+			path = SpliteModel;
+			sourceTree = "<group>";
+		};
+		014842AC1A1736A20067503C /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				014842AD1A1736A20067503C /* contact.sqlite */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
 		01F44FD91A133CE900F042A9 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				0148425C1A1700710067503C /* NLSqlite.h */,
+				0148425D1A1700710067503C /* NLSqlite.m */,
 				01F44FDA1A133CE900F042A9 /* NLRichTextView.h */,
 				01F44FDB1A133CE900F042A9 /* NLRichTextView.m */,
 			);
@@ -286,6 +453,7 @@
 			files = (
 				014082FF1A1304C900784765 /* Main.storyboard in Resources */,
 				014083041A1304C900784765 /* LaunchScreen.xib in Resources */,
+				014842AE1A1736A20067503C /* contact.sqlite in Resources */,
 				014083011A1304C900784765 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -304,10 +472,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				014082FC1A1304C900784765 /* ViewController.m in Sources */,
+				0148429C1A1705DC0067503C /* RATreeView+RATreeNodeCollectionControllerDataSource.m in Sources */,
+				014842971A1705DC0067503C /* RATreeNodeController.m in Sources */,
+				014842981A1705DC0067503C /* RATreeNodeItem+Private.m in Sources */,
+				0148429F1A1705DC0067503C /* RATreeView+UIScrollView.m in Sources */,
+				014842951A1705DC0067503C /* RATreeNode.m in Sources */,
+				0148429D1A1705DC0067503C /* RATreeView+TableViewDataSource.m in Sources */,
+				014842991A1705DC0067503C /* RATreeNodeItem.m in Sources */,
+				014842711A1704CF0067503C /* ViewController.m in Sources */,
+				014842A01A1705DC0067503C /* RATreeView.m in Sources */,
+				014842A81A17306F0067503C /* ContactInfoData.m in Sources */,
+				0148425E1A1700710067503C /* NLSqlite.m in Sources */,
+				014842AB1A17309B0067503C /* Model.m in Sources */,
+				0148429A1A1705DC0067503C /* RATreeView+Enums.m in Sources */,
+				0148429E1A1705DC0067503C /* RATreeView+TableViewDelegate.m in Sources */,
+				0148426C1A17024F0067503C /* RootViewController.m in Sources */,
+				014842941A1705DC0067503C /* RABatchChanges.m in Sources */,
 				014082F91A1304C900784765 /* AppDelegate.m in Sources */,
 				014082F61A1304C900784765 /* main.m in Sources */,
+				014842961A1705DC0067503C /* RATreeNodeCollectionController.m in Sources */,
 				01F44FDC1A133CE900F042A9 /* NLRichTextView.m in Sources */,
+				0148429B1A1705DC0067503C /* RATreeView+Private.m in Sources */,
+				014842A31A1706E40067503C /* SqliteViewCotroller.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
