@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0139AF701A15E01A004E8E81 /* libDurexKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0139AF6C1A15DE69004E8E81 /* libDurexKit.a */; };
 		014082F61A1304C900784765 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 014082F51A1304C900784765 /* main.m */; };
 		014082F91A1304C900784765 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 014082F81A1304C900784765 /* AppDelegate.m */; };
 		014082FC1A1304C900784765 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 014082FB1A1304C900784765 /* ViewController.m */; };
@@ -19,6 +20,27 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		0139AF691A15DE69004E8E81 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0139AF641A15DE69004E8E81 /* DurexKitExample.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2A12B2DA18D17ECE0084B5F9;
+			remoteInfo = DurexKitExample;
+		};
+		0139AF6B1A15DE69004E8E81 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0139AF641A15DE69004E8E81 /* DurexKitExample.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2A6682E718F521A6000645BF;
+			remoteInfo = DurexKit;
+		};
+		0139AF6E1A15E016004E8E81 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0139AF641A15DE69004E8E81 /* DurexKitExample.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 2A6682E618F521A6000645BF;
+			remoteInfo = DurexKit;
+		};
 		0140830A1A1304C900784765 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 014082E81A1304C900784765 /* Project object */;
@@ -29,6 +51,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0139AF581A15D4F8004E8E81 /* NLCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NLCommon.h; sourceTree = "<group>"; };
+		0139AF641A15DE69004E8E81 /* DurexKitExample.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DurexKitExample.xcodeproj; path = ../DurexKit/DurexKitExample.xcodeproj; sourceTree = "<group>"; };
 		014082F01A1304C900784765 /* NLRichTextView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NLRichTextView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		014082F41A1304C900784765 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		014082F51A1304C900784765 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -52,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0139AF701A15E01A004E8E81 /* libDurexKit.a in Frameworks */,
 				014083221A1308FF00784765 /* CoreText.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -66,9 +91,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0139AF651A15DE69004E8E81 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0139AF6A1A15DE69004E8E81 /* DurexKitExample.app */,
+				0139AF6C1A15DE69004E8E81 /* libDurexKit.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		014082E71A1304C900784765 = {
 			isa = PBXGroup;
 			children = (
+				0139AF641A15DE69004E8E81 /* DurexKitExample.xcodeproj */,
 				014082F21A1304C900784765 /* NLRichTextView */,
 				0140830C1A1304C900784765 /* NLRichTextViewTests */,
 				014082F11A1304C900784765 /* Products */,
@@ -87,6 +122,7 @@
 		014082F21A1304C900784765 /* NLRichTextView */ = {
 			isa = PBXGroup;
 			children = (
+				0139AF581A15D4F8004E8E81 /* NLCommon.h */,
 				01F44FD91A133CE900F042A9 /* Classes */,
 				014082F71A1304C900784765 /* AppDelegate.h */,
 				014082F81A1304C900784765 /* AppDelegate.m */,
@@ -158,6 +194,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				0139AF6F1A15E016004E8E81 /* PBXTargetDependency */,
 			);
 			name = NLRichTextView;
 			productName = NLRichTextView;
@@ -211,6 +248,12 @@
 			mainGroup = 014082E71A1304C900784765;
 			productRefGroup = 014082F11A1304C900784765 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 0139AF651A15DE69004E8E81 /* Products */;
+					ProjectRef = 0139AF641A15DE69004E8E81 /* DurexKitExample.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				014082EF1A1304C900784765 /* NLRichTextView */,
@@ -218,6 +261,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		0139AF6A1A15DE69004E8E81 /* DurexKitExample.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = DurexKitExample.app;
+			remoteRef = 0139AF691A15DE69004E8E81 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0139AF6C1A15DE69004E8E81 /* libDurexKit.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libDurexKit.a;
+			remoteRef = 0139AF6B1A15DE69004E8E81 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		014082EE1A1304C900784765 /* Resources */ = {
@@ -262,6 +322,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		0139AF6F1A15E016004E8E81 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = DurexKit;
+			targetProxy = 0139AF6E1A15E016004E8E81 /* PBXContainerItemProxy */;
+		};
 		0140830B1A1304C900784765 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 014082EF1A1304C900784765 /* NLRichTextView */;
@@ -368,20 +433,36 @@
 		014083141A1304C900784765 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"/User/Nick/Documents/XcodeProject/DurexKit/DurexKit/**",
+				);
 				INFOPLIST_FILE = NLRichTextView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "/User/Nick/Documents/XcodeProject/DurexKit/DurexKit/**";
 			};
 			name = Debug;
 		};
 		014083151A1304C900784765 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"/User/Nick/Documents/XcodeProject/DurexKit/DurexKit/**",
+				);
 				INFOPLIST_FILE = NLRichTextView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "/User/Nick/Documents/XcodeProject/DurexKit/DurexKit/**";
 			};
 			name = Release;
 		};

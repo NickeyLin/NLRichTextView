@@ -239,6 +239,7 @@ static inline BOOL validateTag(NSString *tag){
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor whiteColor];
+        self.richText = @"<text></text>";
     }
     return self;
 }
@@ -277,6 +278,8 @@ static inline BOOL validateTag(NSString *tag){
         _ctFrame = (__bridge id)(frame);
         CFRelease(framesetter);
         CFRelease(path);
+        
+        [self setNeedsDisplay];
     }];
 }
 - (int)getAttributedStringHeightWithString:(NSAttributedString *)string  WidthValue:(int) width

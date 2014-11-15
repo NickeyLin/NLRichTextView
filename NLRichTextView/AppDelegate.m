@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 
-@interface AppDelegate ()
+@interface AppDelegate ()<SafeKitPrinterFormat>
 
 @end
 
@@ -17,6 +17,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    setSafeKitLogType(SafeKitLogTypeInfo | SafeKitLogTypeWarning | SafeKitLogTypeError);
+
+    [SafeKitLog shareInstance].formater = self;
     return YES;
 }
 
@@ -42,4 +45,8 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+- (void)formatPrintStackExceptionStr:(NSString *)exceptionStr reason:(NSString *)reasonStr time:(NSString *)timeStr{
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:reasonStr message:exceptionStr delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
+}
 @end

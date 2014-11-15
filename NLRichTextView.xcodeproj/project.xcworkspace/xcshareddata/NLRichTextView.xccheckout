@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>73E6D4A5-DDAD-46F2-8DA8-82477941C80D</string>
+	<key>IDESourceControlProjectName</key>
+	<string>NLRichTextView</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>48886C8ED98711ECEB575ED4F504F0871B8C1296</key>
+		<string>https://github.com/JJMM/DurexKit.git</string>
+		<key>C2D3B843C550051B115CD4E70AA34766DFB5B7FC</key>
+		<string>https://github.com/NickeyLin/NLRichTextView.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>NLRichTextView.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>48886C8ED98711ECEB575ED4F504F0871B8C1296</key>
+		<string>../../../DurexKit</string>
+		<key>C2D3B843C550051B115CD4E70AA34766DFB5B7FC</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/NickeyLin/NLRichTextView.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>C2D3B843C550051B115CD4E70AA34766DFB5B7FC</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>48886C8ED98711ECEB575ED4F504F0871B8C1296</string>
+			<key>IDESourceControlWCCName</key>
+			<string>DurexKit</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>C2D3B843C550051B115CD4E70AA34766DFB5B7FC</string>
+			<key>IDESourceControlWCCName</key>
+			<string>NLRichTextView</string>
+		</dict>
+	</array>
+</dict>
+</plist>

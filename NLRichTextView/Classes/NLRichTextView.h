@@ -58,3 +58,7 @@ typedef enum {
 @property (strong, readonly, nonatomic) NSString    *realText;
 - (void)refresh;
 @end
+
+@interface NLRichTextTextView : UITextView
+
+@end
