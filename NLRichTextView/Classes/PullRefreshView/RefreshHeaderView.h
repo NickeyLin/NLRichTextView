@@ -7,10 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+typedef enum{
+    LoadingStatusReady,
+    LoadingStatusLoading,
+    LoadingStatusFinish,
+    LoadingStatusCancel
+}LoadingStatus;
 
 @interface RefreshHeaderView : UIView
 /**
  *  角度0-360
  */
 @property (assign, nonatomic) NSInteger angle;
+
+@property (assign, nonatomic) LoadingStatus status;
 @end

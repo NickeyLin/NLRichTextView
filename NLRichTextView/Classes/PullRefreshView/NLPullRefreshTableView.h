@@ -19,6 +19,9 @@ typedef enum{
 @property (assign, nonatomic) PullRefreshMode               *refreshMode;
 @property (assign, nonatomic) id<NLRefreshableViewDelegate> delegate;
 @property (assign, nonatomic) id<UITableViewDataSource> dataSource;
+
+- (void)stopLoad;
+- (void)addRefreshTarget:(id)target action:(SEL)action;
 @end
 
 

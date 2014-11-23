@@ -13,22 +13,18 @@
 #define OffsetY         -60
 #define LoadingTimeout  30
 
-typedef enum{
-    LoadingStatusReady,
-    LoadingStatusLoading,
-    LoadingStatusFinish,
-    LoadingStatusCancel
-}LoadingStatus;
+
 
 @interface NLPullRefreshTableView ()<UITableViewDelegate>{
     UITableView         *_tableView;
     RefreshHeaderView   *_refreshHeaderView;
     UIView              *_viewFooter;
-    NSTimer             *_timeoutTimer;
     BOOL                _loading;
     LoadingStatus       _loadingStatus;
+    id                  _refreshTarget;
+    SEL                 _refreshAction;
 }
-
+@property (assign, nonatomic) LoadingStatus loadingStatus;
 @end
 @implementation NLPullRefreshTableView
 - (id)init{
@@ -62,10 +58,23 @@ typedef enum{
 }
 - (void)layoutSubviews{
 }
+- (void)dealloc{
+    _tableView.delegate = nil;
+    _tableView.dataSource = nil;
+    _delegate = nil;
+    _dataSource = nil;
+    _refreshTarget = nil;
+    _refreshAction = nil;
+}
+
 #pragma mark - Getter && Setter
 - (void)setDataSource:(id<UITableViewDataSource>)dataSource{
     _dataSource = dataSource;
     _tableView.dataSource = _dataSource;
+}
+- (void)setLoadingStatus:(LoadingStatus)loadingStatus{
+    _loadingStatus = loadingStatus;
+    _refreshHeaderView.status = _loadingStatus;
 }
 #pragma mark - Methods
 - (BOOL)validDelegateBySelector:(SEL)selector{
@@ -78,42 +87,33 @@ typedef enum{
         return NO;
     }
 }
-
-#pragma mark - Timer
-- (void)startTimeoutTimer{
-    [self stopTimeoutTimer];
-
-    _timeoutTimer = [NSTimer scheduledTimerWithTimeInterval:30 target:self selector:@selector(handleTimeout:) userInfo:nil repeats:NO];
-}
-- (void)stopTimeoutTimer{
-    if (_timeoutTimer) {
-        [_timeoutTimer invalidate];
-    }
-    _timeoutTimer = nil;
-}
-
-- (void)handleTimeout:(NSTimer *)timer{
-    [self stopLoad];
+- (void)addRefreshTarget:(id)target action:(SEL)action{
+    _refreshTarget = target;
+    _refreshAction = action;
 }
 
 #pragma mark - Loading
 - (void)startLoad{
     _loading = YES;
-    _loadingStatus = LoadingStatusLoading;
-    [self startTimeoutTimer];
+    self.loadingStatus = LoadingStatusLoading;
     
     [UIView animateWithDuration:.5 animations:^{
         _tableView.contentInset = UIEdgeInsetsMake(abs(OffsetY), 0, 0, 0);
+    }completion:^(BOOL finished) {
+        if (_refreshTarget && [_refreshTarget respondsToSelector:_refreshAction]) {
+            [_refreshTarget performSelector:_refreshAction withObject:nil];
+        }
     }];
 }
 - (void)stopLoad{
     _loading = NO;
-    _loadingStatus = LoadingStatusFinish;
-    [self stopTimeoutTimer];
+    self.loadingStatus = LoadingStatusFinish;
+
     [UIView animateWithDuration:.25 animations:^{
         _tableView.contentInset = UIEdgeInsetsZero;
     }completion:^(BOOL finished) {
-        _loadingStatus = LoadingStatusReady;
+        self.loadingStatus = LoadingStatusReady;
+        [_tableView reloadData];
     }];
 }
 #pragma mark - UIScrollView Delegate
@@ -140,12 +140,9 @@ typedef enum{
 }
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
     if (decelerate) {
-        if (scrollView.contentOffset.y < OffsetY) {
+        if (_refreshHeaderView.angle >= 360) {
             if ([self shouldPullDown]) {
-//                [self startLoad];
-                _tableView.contentInset = UIEdgeInsetsMake(abs(OffsetY), 0, 0, 0);
-
-                [self performSelector:@selector(stopLoad) withObject:nil afterDelay:3];
+                [self startLoad];
             }
         }
     }
