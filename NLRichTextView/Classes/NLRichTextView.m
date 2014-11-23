@@ -8,45 +8,13 @@
 
 #import "NLRichTextView.h"
 #import <CoreText/CoreText.h>
+#import "NLCustom.h"
 
 #define VALID_STR(s) (s || s.length > 0)
 
 static inline BOOL validateTag(NSString *tag){
     return [tag isEqualToString:@"b"] || [tag isEqualToString:@"i"] || [tag isEqualToString:@"text"] || [tag isEqualToString:@"img"] || [tag isEqualToString:@"font"];
 }
-
-
-@interface UIColor (ColorFromHex)
-+ (UIColor *)colorFromHex:(unsigned long)hex;
-+ (UIColor *)colorFromHexString:(NSString *)hexString;
-@end
-@implementation UIColor (ColorFromHex)
-+ (UIColor *)colorFromHex:(unsigned long)hex{
-    int32_t r = (int32_t)((hex & 0xff0000) >> 16);
-    int32_t g = (int32_t)((hex & 0x00ff00) >> 8);
-    int32_t b = (int32_t)(hex & 0x0000ff);
-    return [UIColor colorWithRed:(r/255.0) green:(g/255.0) blue:(b/255.0) alpha:1];
-}
-
-+ (UIColor *)colorFromHexString:(NSString *)hexString{
-    if (!hexString || (![hexString hasPrefix:@"0x"] && ![hexString hasPrefix:@"#"])) {
-        return nil;
-    }
-    UIColor *color = nil;
-    unsigned long long result;
-    NSScanner *scanner = [NSScanner scannerWithString:hexString];
-    if ([hexString hasPrefix:@"0x"]) {
-        [scanner scanHexLongLong:&result];
-        color = [self colorFromHex:result];
-    }else if ([hexString hasPrefix:@"#"]){
-        [scanner setScanLocation:1];
-        [scanner scanHexLongLong:&result];
-        color = [self colorFromHex:result];
-    }
-    return color;
-}
-
-@end
 
 #define DefaultFontName @"Optima"
 #define DefaultFontSize 14
@@ -59,7 +27,7 @@ static inline BOOL validateTag(NSString *tag){
 @property (assign, nonatomic) FontStyle         fontStyle;
 @property (strong, nonatomic) NSMutableArray    *arrayTagsTree;
 @property (strong, nonatomic) NSMutableArray    *arrayAttributeString;
-@property (strong, nonatomic) void              (^parserComplete)(NSAttributedString *attrString);
+@property (strong, nonatomic) void              (^parserComplete)(NSAttributedString *attrString, NSError *error);
 @end
 @implementation MarkupParser
 
@@ -67,6 +35,8 @@ static inline BOOL validateTag(NSString *tag){
     self = [super init];
     if (self) {
         _font = @"Optima";
+        _fontSize = 14;
+        _fontColor = [UIColor blackColor];
         _images = [NSMutableArray array];
     }
     return self;
@@ -77,13 +47,15 @@ static inline BOOL validateTag(NSString *tag){
     _images = nil;
 }
 
-- (void)markupXMLString:(NSString *)xmlString complete:(void (^)(NSAttributedString *attrString))completion{
+- (void)markupXMLString:(NSString *)xmlString complete:(void (^)(NSAttributedString *attrString, NSError *error))completion{
     _parserComplete = completion;
     NSXMLParser *parser = [[NSXMLParser alloc]initWithData:[xmlString dataUsingEncoding:NSUTF8StringEncoding]];
     parser.delegate = self;
     BOOL success = [parser parse];
     if (!success) {
-        NSLog(@"error:%@", [parser parserError]);
+        if (completion) {
+            completion(nil, [parser parserError]);
+        }
     }
 }
 
@@ -204,14 +176,10 @@ static inline BOOL validateTag(NSString *tag){
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict{
     [_arrayTagsTree addObject:@{elementName : [self attributesWithTag:elementName attrDict:attributeDict]}];
-
-    NSLog(@"\nelementName:%@\nattributes:%@", _arrayTagsTree, attributeDict);
 }
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName{
     [_arrayTagsTree removeLastObject];
-    NSLog(@"\nelementName:%@", _arrayTagsTree);
-
 }
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string{
     NSAttributedString *attrString = [[NSAttributedString alloc]initWithString:string attributes:[[[_arrayTagsTree lastObject] allObjects]lastObject]];
@@ -229,7 +197,7 @@ static inline BOOL validateTag(NSString *tag){
         [attrstring appendAttributedString:str];
     }
     if (_parserComplete) {
-        _parserComplete(attrstring);
+        _parserComplete(attrstring, nil);
     }
 }
 @end
@@ -243,7 +211,9 @@ static inline BOOL validateTag(NSString *tag){
     }
     return self;
 }
-
+- (void)awakeFromNib{
+    self.backgroundColor = [UIColor whiteColor];
+}
 - (void)refresh{
     if (_attString) {
         [self setRichText:_text];
@@ -254,12 +224,16 @@ static inline BOOL validateTag(NSString *tag){
 - (void)setRichText:(NSString *)richText{
     _text = richText;
     MarkupParser *p = [[MarkupParser alloc]init];
-    [p markupXMLString:richText complete:^(NSAttributedString *attrString) {
-        _attString = attrString;
-        
+    [p markupXMLString:richText complete:^(NSAttributedString *attrString, NSError *error) {
+        if (error) {
+            
+            _attString = [[NSAttributedString alloc]initWithString:@"语法错误" attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14], NSForegroundColorAttributeName:[UIColor redColor]}];
+        }else{
+            _attString = attrString;
+        }
         CGRect textFrame;
         if (_alignment & NLTextAlignmentCenter) {
-            int height = [self getAttributedStringHeightWithString:attrString WidthValue:self.bounds.size.width] + 20;
+            int height = [self getAttributedStringHeightWithString:_attString WidthValue:self.bounds.size.width] + 20;
             if (height >= self.frame.size.height) {
                 height = self.frame.size.height;
             }
@@ -284,6 +258,9 @@ static inline BOOL validateTag(NSString *tag){
 }
 - (int)getAttributedStringHeightWithString:(NSAttributedString *)string  WidthValue:(int) width
 {
+    if (!string || string.length <= 0) {
+        return 0;
+    }
     int total_height = 0;
     
     CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)string);    //string 为要<strong>计算</strong><strong>高度</strong>的NSAttributedString
@@ -316,6 +293,9 @@ static inline BOOL validateTag(NSString *tag){
     
 }
 - (void)drawRect:(CGRect)rect{
+    if (_ctFrame == NULL) {
+        return;
+    }
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetTextMatrix(context, CGAffineTransformIdentity);
     CGContextTranslateCTM(context, 0, self.bounds.size.height);
@@ -327,5 +307,23 @@ static inline BOOL validateTag(NSString *tag){
 
 - (void)dealloc{
     
+}
+@end
+
+#pragma mark - RichText Label
+@implementation NLRichTextLabel
+- (void)setRichText:(NSString *)richText{
+    MarkupParser *p = [[MarkupParser alloc]init];
+    [p markupXMLString:richText complete:^(NSAttributedString *attrString, NSError *error) {
+        if (error) {
+            attrString = [[NSAttributedString alloc]initWithString:@"语法错误" attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14], NSForegroundColorAttributeName:[UIColor redColor]}];
+        }
+        _realText = attrString.string;
+        if ([self respondsToSelector:@selector(setAttributedText:)]) {
+            self.attributedText = attrString;
+        }else{
+            NSLog(@"attributed label need ios 6 and later");
+        }
+    }];
 }
 @end

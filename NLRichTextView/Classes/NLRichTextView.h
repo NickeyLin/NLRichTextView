@@ -38,7 +38,7 @@ typedef enum {
  *  @param xmlString  xml string
  *  @param completion 完成回调
  */
-- (void)markupXMLString:(NSString *)xmlString complete:(void (^)(NSAttributedString *attrString))completion;
+- (void)markupXMLString:(NSString *)xmlString complete:(void (^)(NSAttributedString *attrString, NSError *error))completion;
 @end
 
 @interface NLRichTextView : UIView{
@@ -59,6 +59,11 @@ typedef enum {
 - (void)refresh;
 @end
 
+NS_AVAILABLE_IOS(6_0) @interface  NLRichTextLabel : UILabel
+@property (assign, nonatomic) NLTextAlignment       alignment;
+@property (strong, nonatomic) NSString              *richText;
+@property (strong, readonly, nonatomic) NSString    *realText;
+@end
 @interface NLRichTextTextView : UITextView
 
 @end
