@@ -71,6 +71,7 @@
 @end
 @interface RefreshHeaderView (){
     CircleDraw *_circleView;
+    UILabel     *_lable;
 }
 
 @end
@@ -82,6 +83,14 @@
         _circleView = [[CircleDraw alloc]initWithWidth:2 * [self radius]];
         _circleView.center = [self centerPointOfCircle];
         [self addSubview:_circleView];
+        
+        _lable = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 120, 20)];
+        _lable.centerX = self.width / 2;
+        _lable.centerY = _circleView.bottomBorder + 10;
+        _lable.textAlignment = NSTextAlignmentCenter;
+        _lable.font = [UIFont systemFontOfSize:12];
+        _lable.textColor = [UIColor colorFromHex:0xd0d0d0];
+        [self addSubview:_lable];
     }
     return self;
 }
@@ -96,6 +105,10 @@
     return 10;
 }
 
+- (void)hideContent:(BOOL)flag{
+    _circleView.hidden = flag;
+    _lable.hidden = flag;
+}
 #pragma mark - setter && getter
 - (void)setAngle:(NSInteger)angle{
     _circleView.angle = angle;
@@ -126,20 +139,15 @@
     
     switch (_status) {
         case LoadingStatusReady:{
-            
-            NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
-            [style setAlignment:NSTextAlignmentCenter];
             if (self.angle < 360) {
-                [@"下拉可以刷新" drawInRect:CGRectMake(100, [self centerPointOfCircle].y + 15, 120, 20) withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12], NSForegroundColorAttributeName:[UIColor colorFromHex:0xd0d0d0], NSParagraphStyleAttributeName:style}];
+                _lable.text = @"下拉可以刷新";
             }else{
-                [@"松开立即刷新" drawInRect:CGRectMake(100, [self centerPointOfCircle].y + 15, 120, 20) withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12], NSForegroundColorAttributeName:[UIColor colorFromHex:0xd0d0d0], NSParagraphStyleAttributeName:style}];
+                _lable.text = @"松开立即刷新";
             }
             break;
         }
         case LoadingStatusLoading:{
-            NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
-            [style setAlignment:NSTextAlignmentCenter];
-            [@"加载中..." drawInRect:CGRectMake(100, [self centerPointOfCircle].y + 15, 120, 20) withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12], NSForegroundColorAttributeName:[UIColor colorFromHex:0xd0d0d0], NSParagraphStyleAttributeName:style}];
+            _lable.text = @"加载中...";
             break;
         }
         case LoadingStatusFinish:

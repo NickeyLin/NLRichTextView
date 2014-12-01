@@ -25,10 +25,12 @@
 - (BOOL)pullRefreshViewShouldPullDown:(NLPullRefreshTableView *)pullRefreshView{
     return YES;
 }
-
-- (void)actionRefresh{
+- (void)loadData{
+    [_pullRefreshView performSelector:@selector(stopLoad) withObject:nil afterDelay:1];
+    return;
     NSURL *url = [NSURL URLWithString:@"http://itunes.apple.com/lookup?id=909187876"];//284417350 yz--909187876
-    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:10];
+    
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         NSError *error = nil;
         if (connectionError || data == nil) {
@@ -51,6 +53,9 @@
         _dicData = results[0];
         [_pullRefreshView stopLoad];
     }];
+}
+- (void)actionRefresh{
+    [self performSelector:@selector(loadData) withObject:nil afterDelay:1];
 //    _arrayData = [_arrayData arrayByAddingObject:@"12"];
 //    [_pullRefreshView performSelector:@selector(stopLoad) withObject:nil afterDelay:2];
 }
@@ -66,7 +71,7 @@
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
-    NSLog(@"%d", indexPath.row);
+
     cell.textLabel.text = [[_dicData allKeys][indexPath.row] description];
     return cell;
 }

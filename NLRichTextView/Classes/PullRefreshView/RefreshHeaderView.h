@@ -21,4 +21,6 @@ typedef enum{
 @property (assign, nonatomic) NSInteger angle;
 
 @property (assign, nonatomic) LoadingStatus status;
+
+- (void)hideContent:(BOOL)flag;
 @end

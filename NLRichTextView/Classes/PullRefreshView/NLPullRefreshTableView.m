@@ -10,10 +10,8 @@
 #import "RefreshHeaderView.h"
 #import "UIView+Size.h"
 
-#define OffsetY         -60
 #define LoadingTimeout  30
-
-
+#define LoadingInset    60.0f
 
 @interface NLPullRefreshTableView ()<UITableViewDelegate>{
     UITableView         *_tableView;
@@ -50,6 +48,7 @@
     _tableView = [[UITableView alloc]initWithFrame:self.bounds style:UITableViewStylePlain];
     _tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     _tableView.delegate = self;
+    
     [self addSubview:_tableView];
     
     _refreshHeaderView = [[RefreshHeaderView alloc]initWithFrame:self.bounds];
@@ -96,29 +95,37 @@
 - (void)startLoad{
     _loading = YES;
     self.loadingStatus = LoadingStatusLoading;
-    
-    [UIView animateWithDuration:.5 animations:^{
-        _tableView.contentInset = UIEdgeInsetsMake(abs(OffsetY), 0, 0, 0);
-    }completion:^(BOOL finished) {
-        if (_refreshTarget && [_refreshTarget respondsToSelector:_refreshAction]) {
-            [_refreshTarget performSelector:_refreshAction withObject:nil];
-        }
-    }];
+    if (_refreshTarget && _refreshAction && [_refreshTarget respondsToSelector:_refreshAction]) {
+        [_refreshTarget performSelector:_refreshAction withObject:nil afterDelay:1];
+    }
 }
+
 - (void)stopLoad{
     _loading = NO;
     self.loadingStatus = LoadingStatusFinish;
-
+    self.loadingStatus = LoadingStatusReady;
+    [_tableView reloadData];
     [UIView animateWithDuration:.25 animations:^{
         _tableView.contentInset = UIEdgeInsetsZero;
     }completion:^(BOOL finished) {
-        self.loadingStatus = LoadingStatusReady;
-        [_tableView reloadData];
+        
     }];
 }
+
 #pragma mark - UIScrollView Delegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    _refreshHeaderView.angle = -(scrollView.contentOffset.y) * 9 - 150;
+    if (scrollView.contentOffset.y > 0) {
+        [_refreshHeaderView hideContent:YES];
+    }else{
+        [_refreshHeaderView hideContent:NO];
+    }
+    if(self.loadingStatus == LoadingStatusLoading){
+        CGPoint offset = scrollView.contentOffset;
+        [scrollView setContentInset:UIEdgeInsetsMake(LoadingInset, 0, 0, 0)];
+        scrollView.contentOffset = offset;
+    }else if(scrollView.isDragging){
+        _refreshHeaderView.angle = (fabsf(scrollView.contentOffset.y) / LoadingInset) * 360;
+    }
     if (_delegate && [_delegate respondsToSelector:@selector(scrollViewDidScroll:)]) {
         [_delegate scrollViewDidScroll:scrollView];
     }
@@ -140,9 +147,12 @@
 }
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
     if (decelerate) {
-        if (_refreshHeaderView.angle >= 360) {
+        if (scrollView.contentOffset.y < - LoadingInset && !self.loadingStatus == LoadingStatusLoading) {
             if ([self shouldPullDown]) {
                 [self startLoad];
+                CGPoint offset = scrollView.contentOffset;
+                [scrollView setContentInset:UIEdgeInsetsMake(LoadingInset, 0, 0, 0)];
+                scrollView.contentOffset = offset;
             }
         }
     }
@@ -386,7 +396,7 @@
     if (_delegate && [_delegate respondsToSelector:@selector(tableView:shouldIndentWhileEditingRowAtIndexPath:)]) {
         return [_delegate tableView:tableView shouldIndentWhileEditingRowAtIndexPath:indexPath];
     }else{
-        return NO;
+        return YES;
     }
 }
 

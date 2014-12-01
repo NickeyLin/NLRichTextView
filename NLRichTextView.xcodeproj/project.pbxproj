@@ -697,17 +697,18 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jian Lin (7H8TG56753)";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"/User/Nick/Documents/XcodeProject/DurexKit/DurexKit/**",
 				);
 				INFOPLIST_FILE = NLRichTextView/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c64fc101-4896-4f03-b2bf-c35a76f8a271";
+				PROVISIONING_PROFILE = "09ca25e8-1084-4e7a-8b42-eed6a541f0d4";
 				USER_HEADER_SEARCH_PATHS = "/User/Nick/Documents/XcodeProject/DurexKit/DurexKit/**";
 			};
 			name = Debug;
@@ -718,17 +719,18 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jian Lin (7H8TG56753)";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"/User/Nick/Documents/XcodeProject/DurexKit/DurexKit/**",
 				);
 				INFOPLIST_FILE = NLRichTextView/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c64fc101-4896-4f03-b2bf-c35a76f8a271";
+				PROVISIONING_PROFILE = "09ca25e8-1084-4e7a-8b42-eed6a541f0d4";
 				USER_HEADER_SEARCH_PATHS = "/User/Nick/Documents/XcodeProject/DurexKit/DurexKit/**";
 			};
 			name = Release;
