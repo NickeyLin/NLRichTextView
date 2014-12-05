@@ -72,9 +72,9 @@ typedef enum{
     UINavigationBar *navBar = self.navigationBar;
 
     if ([navBar respondsToSelector:@selector(setBarTintColor:)]) {
-        [navBar setBarTintColor:[UIColor colorFromHex:0xfdfdfd]];
+        [navBar setBarTintColor:[UIColor colorFromHex:0xe43920]];
     }else{
-        [navBar setTintColor:[UIColor colorFromHex:0xfdfdfd]];
+        [navBar setTintColor:[UIColor colorFromHex:0xe43920]];
     }
     
     [self.view addGestureRecognizer:_pan];
@@ -136,7 +136,9 @@ typedef enum{
     if ([viewController respondsToSelector:@selector(setAutomaticallyAdjustsScrollViewInsets:)]) {
         viewController.automaticallyAdjustsScrollViewInsets = NO;
     }
-
+    if ([viewController respondsToSelector:@selector(setEdgesForExtendedLayout:)]) {
+        viewController.edgesForExtendedLayout = UIRectEdgeNone;
+    }
     if ([navigationController.viewControllers count] == 0 ||[[navigationController.viewControllers objectAtIndex:0] class] == [viewController class]) {
         return;
     }

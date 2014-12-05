@@ -27,32 +27,6 @@
 }
 - (void)loadData{
     [_pullRefreshView performSelector:@selector(stopLoad) withObject:nil afterDelay:1];
-    return;
-    NSURL *url = [NSURL URLWithString:@"http://itunes.apple.com/lookup?id=909187876"];//284417350 yz--909187876
-    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:10];
-    
-    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-        NSError *error = nil;
-        if (connectionError || data == nil) {
-            NSLog(@"%@", connectionError);
-            error = [NSError errorWithDomain:@"CheckUpdate" code:201 userInfo:@{NSLocalizedDescriptionKey: @"未获取到版本信息，请稍后再试。"}];
-            return;
-        }
-        NSJSONSerialization *json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
-        if (error) {
-            error = [NSError errorWithDomain:@"CheckUpdate" code:202 userInfo:@{NSLocalizedDescriptionKey: @"参数异常"}];
-            
-            return;
-        }
-        NSArray *results = [json valueForKey:@"results"];
-        if (!results || results.count <= 0) {
-            error = [NSError errorWithDomain:@"CheckUpdate" code:203 userInfo:@{NSLocalizedDescriptionKey: @"参数异常"}];
-            
-            return;
-        }
-        _dicData = results[0];
-        [_pullRefreshView stopLoad];
-    }];
 }
 - (void)actionRefresh{
     [self performSelector:@selector(loadData) withObject:nil afterDelay:1];
