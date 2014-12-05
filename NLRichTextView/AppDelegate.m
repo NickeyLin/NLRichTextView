@@ -7,8 +7,12 @@
 //
 
 #import "AppDelegate.h"
+#include <stdio.h>
 
-@interface AppDelegate ()<SafeKitPrinterFormat>
+extern void __gcov_flush();
+
+
+@interface AppDelegate ()
 
 @end
 
@@ -19,7 +23,6 @@
     // Override point for customization after application launch.
     setSafeKitLogType(SafeKitLogTypeInfo | SafeKitLogTypeWarning | SafeKitLogTypeError);
 
-    [SafeKitLog shareInstance].formater = self;
     return YES;
 }
 
@@ -31,6 +34,8 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    __gcov_flush();
+
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
@@ -43,10 +48,5 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-}
-
-- (void)formatPrintStackExceptionStr:(NSString *)exceptionStr reason:(NSString *)reasonStr time:(NSString *)timeStr{
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:reasonStr message:exceptionStr delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alert show];
 }
 @end

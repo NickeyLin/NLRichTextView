@@ -36,12 +36,18 @@
 		014842A81A17306F0067503C /* ContactInfoData.m in Sources */ = {isa = PBXBuildFile; fileRef = 014842A71A17306F0067503C /* ContactInfoData.m */; };
 		014842AB1A17309B0067503C /* Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 014842AA1A17309B0067503C /* Model.m */; };
 		014842AE1A1736A20067503C /* contact.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 014842AD1A1736A20067503C /* contact.sqlite */; };
+		01681AAD1A2F1C1600B4E2C5 /* ShowCrashLogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01681AAC1A2F1C1600B4E2C5 /* ShowCrashLogViewController.m */; };
+		01681ABB1A3012D800B4E2C5 /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01681AB01A3012D800B4E2C5 /* libOCMock.a */; };
 		017E9CFC1A20795A0089B8D8 /* RefreshHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 017E9CFB1A20795A0089B8D8 /* RefreshHeaderView.m */; };
 		017E9CFF1A21CF510089B8D8 /* NLAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 017E9CFE1A21CF510089B8D8 /* NLAnimation.m */; };
+		01A08AF21A306DFE00681FBE /* NLNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A08AF11A306DFE00681FBE /* NLNavigationController.m */; };
+		01E7239A1A304BFF007595E3 /* SqliteViewCotroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 014842A21A1706E40067503C /* SqliteViewCotroller.m */; };
+		01E7239E1A304CE6007595E3 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E7239D1A304CE6007595E3 /* UIColor+Hex.m */; };
+		01E7239F1A304D1E007595E3 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E7239D1A304CE6007595E3 /* UIColor+Hex.m */; };
+		01E723A11A304D3D007595E3 /* UIColorHexTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E723A01A304D3D007595E3 /* UIColorHexTests.m */; };
 		01F44FDC1A133CE900F042A9 /* NLRichTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F44FDB1A133CE900F042A9 /* NLRichTextView.m */; };
 		01FC04921A1851C600A83F72 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01FC04911A1851C600A83F72 /* ViewController.m */; };
 		01FC049B1A185C0500A83F72 /* NLPullRefreshTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01FC049A1A185C0500A83F72 /* NLPullRefreshTableView.m */; };
-		01FC04A71A185CB400A83F72 /* NLCustom.m in Sources */ = {isa = PBXBuildFile; fileRef = 01FC04A61A185CB400A83F72 /* NLCustom.m */; };
 		01FC04AA1A185F0800A83F72 /* PullRefreshViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01FC04A91A185F0700A83F72 /* PullRefreshViewController.m */; };
 		01FC04B31A1895D700A83F72 /* UIView+Size.m in Sources */ = {isa = PBXBuildFile; fileRef = 01FC04B21A1895D700A83F72 /* UIView+Size.m */; };
 /* End PBXBuildFile section */
@@ -135,18 +141,33 @@
 		014842A91A17309B0067503C /* Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
 		014842AA1A17309B0067503C /* Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Model.m; sourceTree = "<group>"; };
 		014842AD1A1736A20067503C /* contact.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = contact.sqlite; sourceTree = "<group>"; };
+		01681AAB1A2F1C1600B4E2C5 /* ShowCrashLogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowCrashLogViewController.h; sourceTree = "<group>"; };
+		01681AAC1A2F1C1600B4E2C5 /* ShowCrashLogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowCrashLogViewController.m; sourceTree = "<group>"; };
+		01681AB01A3012D800B4E2C5 /* libOCMock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libOCMock.a; sourceTree = "<group>"; };
+		01681AB21A3012D800B4E2C5 /* NSNotificationCenter+OCMAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNotificationCenter+OCMAdditions.h"; sourceTree = "<group>"; };
+		01681AB31A3012D800B4E2C5 /* OCMArg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMArg.h; sourceTree = "<group>"; };
+		01681AB41A3012D800B4E2C5 /* OCMConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMConstraint.h; sourceTree = "<group>"; };
+		01681AB51A3012D800B4E2C5 /* OCMLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMLocation.h; sourceTree = "<group>"; };
+		01681AB61A3012D800B4E2C5 /* OCMMacroState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMMacroState.h; sourceTree = "<group>"; };
+		01681AB71A3012D800B4E2C5 /* OCMock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMock.h; sourceTree = "<group>"; };
+		01681AB81A3012D800B4E2C5 /* OCMockObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMockObject.h; sourceTree = "<group>"; };
+		01681AB91A3012D800B4E2C5 /* OCMRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMRecorder.h; sourceTree = "<group>"; };
+		01681ABA1A3012D800B4E2C5 /* OCMStubRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMStubRecorder.h; sourceTree = "<group>"; };
 		017E9CFA1A20795A0089B8D8 /* RefreshHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefreshHeaderView.h; sourceTree = "<group>"; };
 		017E9CFB1A20795A0089B8D8 /* RefreshHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefreshHeaderView.m; sourceTree = "<group>"; };
 		017E9CFD1A21CF510089B8D8 /* NLAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLAnimation.h; sourceTree = "<group>"; };
 		017E9CFE1A21CF510089B8D8 /* NLAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLAnimation.m; sourceTree = "<group>"; };
+		01A08AF01A306DFE00681FBE /* NLNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLNavigationController.h; sourceTree = "<group>"; };
+		01A08AF11A306DFE00681FBE /* NLNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLNavigationController.m; sourceTree = "<group>"; };
+		01E7239C1A304CE6007595E3 /* UIColor+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Hex.h"; sourceTree = "<group>"; };
+		01E7239D1A304CE6007595E3 /* UIColor+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Hex.m"; sourceTree = "<group>"; };
+		01E723A01A304D3D007595E3 /* UIColorHexTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIColorHexTests.m; sourceTree = "<group>"; };
 		01F44FDA1A133CE900F042A9 /* NLRichTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLRichTextView.h; sourceTree = "<group>"; };
 		01F44FDB1A133CE900F042A9 /* NLRichTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLRichTextView.m; sourceTree = "<group>"; };
 		01FC04901A1851C600A83F72 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		01FC04911A1851C600A83F72 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		01FC04991A185C0500A83F72 /* NLPullRefreshTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLPullRefreshTableView.h; sourceTree = "<group>"; };
 		01FC049A1A185C0500A83F72 /* NLPullRefreshTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLPullRefreshTableView.m; sourceTree = "<group>"; };
-		01FC04A51A185CB400A83F72 /* NLCustom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLCustom.h; sourceTree = "<group>"; };
-		01FC04A61A185CB400A83F72 /* NLCustom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLCustom.m; sourceTree = "<group>"; };
 		01FC04A81A185F0700A83F72 /* PullRefreshViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullRefreshViewController.h; sourceTree = "<group>"; };
 		01FC04A91A185F0700A83F72 /* PullRefreshViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullRefreshViewController.m; sourceTree = "<group>"; };
 		01FC04B11A1895D700A83F72 /* UIView+Size.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Size.h"; sourceTree = "<group>"; };
@@ -159,6 +180,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0148426E1A1703260067503C /* libsqlite3.dylib in Frameworks */,
+				01681ABB1A3012D800B4E2C5 /* libOCMock.a in Frameworks */,
 				0139AF701A15E01A004E8E81 /* libDurexKit.a in Frameworks */,
 				014083221A1308FF00784765 /* CoreText.framework in Frameworks */,
 			);
@@ -215,6 +237,7 @@
 		014082F21A1304C900784765 /* NLRichTextView */ = {
 			isa = PBXGroup;
 			children = (
+				01681AAF1A3012D800B4E2C5 /* OCMock */,
 				014842AC1A1736A20067503C /* Resource */,
 				0139AF581A15D4F8004E8E81 /* NLCommon.h */,
 				014842A41A1707030067503C /* Model */,
@@ -245,6 +268,7 @@
 			children = (
 				0140830F1A1304C900784765 /* NLRichTextViewTests.m */,
 				0140830D1A1304C900784765 /* Supporting Files */,
+				01E723A01A304D3D007595E3 /* UIColorHexTests.m */,
 			);
 			path = NLRichTextViewTests;
 			sourceTree = "<group>";
@@ -268,6 +292,7 @@
 		014842631A17012B0067503C /* TestUI */ = {
 			isa = PBXGroup;
 			children = (
+				01681AA91A2F1BE600B4E2C5 /* ShowCrashLog */,
 				01FC04941A1851E400A83F72 /* PullRefreshDemo */,
 				01FC048F1A1851C600A83F72 /* RichTextDemo */,
 				014842741A1705DC0067503C /* SqliteDemo */,
@@ -358,6 +383,40 @@
 			path = Resource;
 			sourceTree = "<group>";
 		};
+		01681AA91A2F1BE600B4E2C5 /* ShowCrashLog */ = {
+			isa = PBXGroup;
+			children = (
+				01681AAB1A2F1C1600B4E2C5 /* ShowCrashLogViewController.h */,
+				01681AAC1A2F1C1600B4E2C5 /* ShowCrashLogViewController.m */,
+			);
+			path = ShowCrashLog;
+			sourceTree = "<group>";
+		};
+		01681AAF1A3012D800B4E2C5 /* OCMock */ = {
+			isa = PBXGroup;
+			children = (
+				01681AB01A3012D800B4E2C5 /* libOCMock.a */,
+				01681AB11A3012D800B4E2C5 /* OCMock */,
+			);
+			path = OCMock;
+			sourceTree = "<group>";
+		};
+		01681AB11A3012D800B4E2C5 /* OCMock */ = {
+			isa = PBXGroup;
+			children = (
+				01681AB21A3012D800B4E2C5 /* NSNotificationCenter+OCMAdditions.h */,
+				01681AB31A3012D800B4E2C5 /* OCMArg.h */,
+				01681AB41A3012D800B4E2C5 /* OCMConstraint.h */,
+				01681AB51A3012D800B4E2C5 /* OCMLocation.h */,
+				01681AB61A3012D800B4E2C5 /* OCMMacroState.h */,
+				01681AB71A3012D800B4E2C5 /* OCMock.h */,
+				01681AB81A3012D800B4E2C5 /* OCMockObject.h */,
+				01681AB91A3012D800B4E2C5 /* OCMRecorder.h */,
+				01681ABA1A3012D800B4E2C5 /* OCMStubRecorder.h */,
+			);
+			path = OCMock;
+			sourceTree = "<group>";
+		};
 		01F44FD91A133CE900F042A9 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -368,8 +427,6 @@
 				0148425D1A1700710067503C /* NLSqlite.m */,
 				01F44FDA1A133CE900F042A9 /* NLRichTextView.h */,
 				01F44FDB1A133CE900F042A9 /* NLRichTextView.m */,
-				01FC04A51A185CB400A83F72 /* NLCustom.h */,
-				01FC04A61A185CB400A83F72 /* NLCustom.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -406,10 +463,14 @@
 		01FC04AC1A18955700A83F72 /* UILib */ = {
 			isa = PBXGroup;
 			children = (
+				01A08AF01A306DFE00681FBE /* NLNavigationController.h */,
+				01A08AF11A306DFE00681FBE /* NLNavigationController.m */,
 				017E9CFD1A21CF510089B8D8 /* NLAnimation.h */,
 				017E9CFE1A21CF510089B8D8 /* NLAnimation.m */,
 				01FC04B11A1895D700A83F72 /* UIView+Size.h */,
 				01FC04B21A1895D700A83F72 /* UIView+Size.m */,
+				01E7239C1A304CE6007595E3 /* UIColor+Hex.h */,
+				01E7239D1A304CE6007595E3 /* UIColor+Hex.m */,
 			);
 			path = UILib;
 			sourceTree = "<group>";
@@ -442,6 +503,7 @@
 				014083051A1304C900784765 /* Sources */,
 				014083061A1304C900784765 /* Frameworks */,
 				014083071A1304C900784765 /* Resources */,
+				01E723991A304691007595E3 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -535,6 +597,22 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		01E723991A304691007595E3 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = XcodeCoverage/exportenv.sh;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		014082EC1A1304C900784765 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -543,14 +621,15 @@
 				0148429C1A1705DC0067503C /* RATreeView+RATreeNodeCollectionControllerDataSource.m in Sources */,
 				014842971A1705DC0067503C /* RATreeNodeController.m in Sources */,
 				017E9CFF1A21CF510089B8D8 /* NLAnimation.m in Sources */,
-				01FC04A71A185CB400A83F72 /* NLCustom.m in Sources */,
 				014842981A1705DC0067503C /* RATreeNodeItem+Private.m in Sources */,
 				0148429F1A1705DC0067503C /* RATreeView+UIScrollView.m in Sources */,
+				01A08AF21A306DFE00681FBE /* NLNavigationController.m in Sources */,
 				014842951A1705DC0067503C /* RATreeNode.m in Sources */,
 				0148429D1A1705DC0067503C /* RATreeView+TableViewDataSource.m in Sources */,
 				014842991A1705DC0067503C /* RATreeNodeItem.m in Sources */,
 				014842A01A1705DC0067503C /* RATreeView.m in Sources */,
 				01FC04B31A1895D700A83F72 /* UIView+Size.m in Sources */,
+				01E7239E1A304CE6007595E3 /* UIColor+Hex.m in Sources */,
 				014842A81A17306F0067503C /* ContactInfoData.m in Sources */,
 				0148425E1A1700710067503C /* NLSqlite.m in Sources */,
 				014842AB1A17309B0067503C /* Model.m in Sources */,
@@ -564,6 +643,7 @@
 				01393DDE1A1AE104006571DD /* NLHorizontalTableView.m in Sources */,
 				017E9CFC1A20795A0089B8D8 /* RefreshHeaderView.m in Sources */,
 				01F44FDC1A133CE900F042A9 /* NLRichTextView.m in Sources */,
+				01681AAD1A2F1C1600B4E2C5 /* ShowCrashLogViewController.m in Sources */,
 				01FC049B1A185C0500A83F72 /* NLPullRefreshTableView.m in Sources */,
 				01FC04921A1851C600A83F72 /* ViewController.m in Sources */,
 				0148429B1A1705DC0067503C /* RATreeView+Private.m in Sources */,
@@ -577,6 +657,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				014083101A1304C900784765 /* NLRichTextViewTests.m in Sources */,
+				01E723A11A304D3D007595E3 /* UIColorHexTests.m in Sources */,
+				01E7239F1A304D1E007595E3 /* UIColor+Hex.m in Sources */,
+				01E7239A1A304BFF007595E3 /* SqliteViewCotroller.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -698,6 +781,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Jian Lin (7H8TG56753)";
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -706,6 +791,10 @@
 				INFOPLIST_FILE = NLRichTextView/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/NLRichTextView/OCMock",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "09ca25e8-1084-4e7a-8b42-eed6a541f0d4";
@@ -728,6 +817,10 @@
 				INFOPLIST_FILE = NLRichTextView/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/NLRichTextView/OCMock",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "09ca25e8-1084-4e7a-8b42-eed6a541f0d4";
@@ -743,12 +836,26 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/OCMock",
+				);
 				INFOPLIST_FILE = NLRichTextViewTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					XCTest,
+					"-force_load",
+					"$(SRCROOT)/OCMock/libOCMock.a",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NLRichTextView.app/NLRichTextView";
 			};
@@ -762,8 +869,21 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
+				GCC_GENERATE_TEST_COVERAGE_FILES = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/OCMock",
+				);
 				INFOPLIST_FILE = NLRichTextViewTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					XCTest,
+					"-force_load",
+					"$(SRCROOT)/OCMock/libOCMock.a",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NLRichTextView.app/NLRichTextView";
 			};

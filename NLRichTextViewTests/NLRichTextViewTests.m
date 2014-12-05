@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
+#import <OCMock/OCMock.h>
+#import "SqliteViewCotroller.h"
 
 @interface NLRichTextViewTests : XCTestCase
 
@@ -29,7 +31,10 @@
     // This is an example of a functional test case.
     XCTAssert(YES, @"Pass");
 }
-
+- (void)testInitialSqliteViewController{
+    SqliteViewCotroller *vc = [[SqliteViewCotroller alloc]init];
+    XCTAssertNotNil(vc, @"");
+}
 - (void)testPerformanceExample {
     // This is an example of a performance test case.
     [self measureBlock:^{

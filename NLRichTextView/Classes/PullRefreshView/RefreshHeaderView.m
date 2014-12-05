@@ -8,7 +8,7 @@
 
 #import "RefreshHeaderView.h"
 #import "UIView+Size.h"
-#import "NLCustom.h"
+#import "UIColor+Hex.h"
 #import "NLAnimation.h"
 
 

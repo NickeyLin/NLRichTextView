@@ -8,7 +8,7 @@
 
 #import "NLRichTextView.h"
 #import <CoreText/CoreText.h>
-#import "NLCustom.h"
+#import "UIColor+Hex.h"
 
 #define VALID_STR(s) (s || s.length > 0)
 

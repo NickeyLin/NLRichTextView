@@ -1,13 +1,14 @@
 //
-//  NLCustom.m
+//  UIColor+Hex.m
 //  NLRichTextView
 //
-//  Created by Nick.Lin on 14/11/16.
+//  Created by Nick.Lin on 14/12/4.
 //  Copyright (c) 2014年 changhong. All rights reserved.
 //
 
-#import "NLCustom.h"
-@implementation UIColor (ColorFromHex)
+#import "UIColor+Hex.h"
+
+@implementation UIColor (Hex)
 + (UIColor *)colorFromHex:(unsigned long)hex{
     int32_t r = (int32_t)((hex & 0xff0000) >> 16);
     int32_t g = (int32_t)((hex & 0x00ff00) >> 8);
@@ -28,12 +29,11 @@
     }else if ([hexString hasPrefix:@"#"]){
         [scanner setScanLocation:1];
         [scanner scanHexLongLong:&result];
+        if (result > 0xffffff) {
+            result = 0;
+        }
         color = [self colorFromHex:(unsigned long)result];
     }
     return color;
 }
-
-@end
-@implementation NLCustom
-
 @end

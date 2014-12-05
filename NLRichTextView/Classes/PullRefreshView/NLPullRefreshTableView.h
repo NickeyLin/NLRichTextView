@@ -6,7 +6,7 @@
 //  Copyright (c) 2014年 changhong. All rights reserved.
 //
 
-#import "NLCustom.h"
+#import "UIColor+Hex.h"
 
 @protocol  NLRefreshableViewDelegate;
 typedef enum{
